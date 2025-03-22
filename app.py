@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -10,8 +10,12 @@ def editor():
 def test():
   return render_template("test.html")
 
-@app.route('/api/test')
+@app.route('/api/test', methods=['POST'])
 def api_test():
+  if request.method == "POST":
+    print(request.form.get("test"))
+  else:
+    print("not post grrrr")
   return
 
 if __name__ == "__main__":
